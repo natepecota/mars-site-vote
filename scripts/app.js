@@ -34,24 +34,26 @@ for (var i = 0; i < imgFileLocations.length; i++) {
 }
 
 var VoteTracker = function() {
-  this.findTagOne = document.getElementById('clickOne');
-  this.findTagTwo = document.getElementById('clickTwo');
-  this.resetP = document.getElementById('resetP');
+  // this.findTagOne = document.getElementById('clickOne');
+  // this.findTagTwo = document.getElementById('clickTwo');
+  // this.resetP = document.getElementById('resetP');
 
   this.displayImg = function () {
     whichSitesNow = this.randomPickTwo();
-    this.point1 = this.findTagOne.appendChild(document.createElement('div'));
-    this.point2 = this.findTagTwo.appendChild(document.createElement('div'));
-    this.point1.innerHTML = "<img src=\'" + imgArray[whichSitesNow[0]].fileNameForImg + "\' alt='The first site to consider' title='This is the first landing site to consider for a mission to Mars. Click on the image to vote in favor.' \>";
-    this.point2.innerHTML = "<img src=\'" + imgArray[whichSitesNow[1]].fileNameForImg + "\' alt='The second site to consider' title='This is the second landing site to consider for a mission to Mars. Click on the image to vote in favor.' \>";
-    this.point1.addEventListener('click', this.handleImgClicks);
-    this.point2.addEventListener('click', this.handleImgClicks);
+
+    $('#image1').html("<img src=\'" + imgArray[whichSitesNow[0]].fileNameForImg + "\' alt='The first site to consider' title='This is the first landing site to consider for a mission to Mars. Click on the image to vote in favor.' \>");
+
+    $('#image2').html("<img src=\'" + imgArray[whichSitesNow[1]].fileNameForImg + "\' alt='The second site to consider' title='This is the second landing site to consider for a mission to Mars. Click on the image to vote in favor.' \>");
+
+    $('#image1').on('click', this.handleImgClicks);
+    $('#image2').on('click', this.handleImgClicks);
 
   };
   this.displayImg();
 };
 
 VoteTracker.prototype.makeChart = function () {
+  // var ctx = $('#voteChart').get(0).getContext('2d');
   var ctx = document.getElementById('voteChart').getContext("2d");
   var data = { //beware, hardcoded to 14 landing sites
     labels: ['Site1', 'Site2', 'Site3', 'Site4', 'Site5', 'Site6', 'Site7', 'Site8','Site9', 'Site10', 'Site11', 'Site12', 'Site13', 'Site14'],
@@ -116,27 +118,30 @@ VoteTracker.prototype.retrieveData = function(ev) {
 };
 
 VoteTracker.prototype.resetData = function (ev){
-  document.getElementById('confirmButton').className = null;
-  document.getElementById('cancel').className = null;
+  $('#confirmButton').removeClass('hidden');
+  $('#confirmButton').addClass(null);
+  $('#cancel').removeClass('hidden');
+  $('#cancel').addClass(null);
 };
 
 VoteTracker.prototype.confirmData = function (ev) {
   localStorage.setItem('superKey', 'null');
-  document.getElementById('confirmButton').className = "hidden";
-  document.getElementById('cancel').className = "hidden";
+  $('#confirmButton').addClass('hidden');
+  $('#cancel').addClass('hidden');
 };
 
 VoteTracker.prototype.cancelReset = function (ev) {
-  document.getElementById('confirmButton').className = "hidden";
-  document.getElementById('cancel').className = "hidden";
+  $('#confirmButton').addClass('hidden');
+  $('#cancel').addClass('hidden');
 };
 
 function handleTheReset (event) {
   didReset = true;
-  document.getElementById('clickOne').innerHTML = null;
-  document.getElementById('clickOne').className = null;
-  document.getElementById('clickTwo').innerHTML = null;
-  document.getElementById('clickTwo').className = null;
+  $('#clickOne').html(null);
+  $('#clickOne').addClass(null);
+  $('#clickTwo').html(null);
+  $('#clickTwo').addClass(null);
+  
   pageOneTracker.displayImg();
 }
 
@@ -147,11 +152,11 @@ function raiseTheChartFlag() {
 //make the object, it calls all of the other constructors
 var pageOneTracker = new VoteTracker();
 //add listeners to the elements we want to get events from
-pageOneTracker.point1.addEventListener('click', pageOneTracker.handleImgClicks);
-pageOneTracker.point2.addEventListener('click', pageOneTracker.handleImgClicks);
+$(pageOneTracker).on('click', pageOneTracker.handleImgClicks);
+$(pageOneTracker).on('click', pageOneTracker.handleImgClicks);
 
-document.getElementById('storeButton').addEventListener('click', pageOneTracker.storeData);
-document.getElementById('retrieveButton').addEventListener('click', pageOneTracker.retrieveData);
-document.getElementById('resetButton').addEventListener('click', pageOneTracker.resetData);
-document.getElementById('confirmButton').addEventListener('click', pageOneTracker.confirmData);
-document.getElementById('cancel').addEventListener('click', pageOneTracker.cancelReset);
+$('#storeButton').on('click', pageOneTracker.storeData);
+$('#retrieveButton').on('click', pageOneTracker.retrieveData);
+$('#resetButton').on('click', pageOneTracker.resetData);
+$('#confirmButton').on('click', pageOneTracker.confirmData);
+$('#cancel').on('click', pageOneTracker.cancelReset);
