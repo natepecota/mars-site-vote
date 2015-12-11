@@ -1,3 +1,10 @@
+User Stories:
+
+1: As a developer I want to use jQuery for all DOM manipulation and event listeners so that the code is cleaner.
+2: As a developer I want to organize CSS according to SMACSS principles so the files are organized.
+3: As a developer I want to make the site responsive so that the user experience is better.
+4: As a developer I want to use ajax to retrieve our data source so that our data organized.
+
 Readme for the Mars Site Vote website project
 
 
@@ -24,4 +31,3 @@ Update 7: Adding local storage, using grid to make responsive.
 
 Update 8: Removed much of the manual css, to get out of the way of skeleton.
   Also added cancel reset button.
-
