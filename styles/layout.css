@@ -1,0 +1,35 @@
+h1, h2, h3 {
+  padding-left: .5em;
+}
+
+#directions {
+  margin-left: .5em;
+}
+
+img {
+  width: 80%;
+  height: 75%;
+  border: .2em solid #0d0d0d;
+  border-radius: .4em;
+}
+
+#image1 {
+  padding-left: .5em;
+}
+
+#image2 {
+  padding-left: .5em;
+}
+
+button {
+  padding: 0 .1em;
+}
+
+canvas {
+  display: block;
+  margin: .1em;
+}
+
+.hidden {
+  display: none;
+}
